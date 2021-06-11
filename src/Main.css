@@ -1,0 +1,52 @@
+.main-grid-container{
+  
+  height:100vh;
+  width:100vw;
+
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr 1fr;
+  gap: 0px 0px;
+  grid-auto-flow: row;
+  grid-template-areas:
+    "."
+    ".";
+  
+  background-color: aliceblue;
+
+}
+
+.area-A{
+  align-self: center;
+  justify-self: center;
+  height:50vh;
+  width:80vw;
+  background-color:lightpink;
+}
+
+.area-B{
+  align-self: center;
+  justify-self: center;
+  height:50vh;
+  width:80vw;
+  background-color:lightskyblue;
+}
+
+.container{
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+}
+
+.RowComponent{
+  display:flex;
+  flex-direction: row;
+  justify-content: start;
+}
+
+.column-style{
+  background-color: grey;
+  width: 100%;
+  margin: 2px 2px 2px 2px;
+
+}
