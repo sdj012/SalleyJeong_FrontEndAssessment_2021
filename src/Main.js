@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import './Main.css';
 import ContainerComponent from './ContainerComponent';
-import RowComponent from './RowComponent.js';
+import Blurb from './Blurb';
+import TestComplete from './TestComplete';
 
 class Main extends React.Component {
 
@@ -12,22 +13,18 @@ class Main extends React.Component {
 
     this.state={ 
       pagination:1,
-      value:'',
       sentence:'',
       score:0,
-      sentenceArray:[],
+      scrambled:'',
+      scrambledMiddle:'',
       gameComplete:false,
-      blockGrade:1,
-      blockCompleteness:false,
+      markBlockComplete:false,
     }
   
-  
+    this.getData=this.getData.bind(this);
     this.setSentence=this.setSentence.bind(this);
     this.returnSentence=this.returnSentence.bind(this);
-    this.getData=this.getData.bind(this);
-    this.breakSentence=this.breakSentence.bind(this);
-    this.updateBlockCompleteness=this.updateBlockCompleteness.bind(this);
-    this.paginate=this.paginate.bind(this);
+    this.markBlockComplete=this.markBlockComplete.bind(this);
 
   }
 
@@ -37,13 +34,10 @@ class Main extends React.Component {
       sentence:data,
     })
 
-    this.breakSentence();
-
-    console.log( "Sentence: " + this.state.sentence)
-
   }
 
-  returnSentence=()=>{
+
+  returnSentence=()=>{ 
     return this.state.sentence;
   }
 
@@ -51,14 +45,13 @@ class Main extends React.Component {
     
     e.preventDefault();
     this.setState({
-      pagination:this.state.pagination+1
+      pagination:this.state.pagination+1,
+      markBlockComplete:false,
     },function(){
       this.getData();
     })
 
   }
-
-
 
   getData=()=>{
     axios.get("https://api.hatchways.io/assessment/sentences/" + this.state.pagination)
@@ -70,88 +63,52 @@ class Main extends React.Component {
   }
 
 
-  breakSentence=()=>{
+  markBlockComplete=(isComplete)=>{
 
-    //Split Sentence By Space
-    let array=[]
-    array=this.state.sentence.split(" ");
-
-    let newArray=[];
-    let lastElement=array.length-1
-
-    //With the Exception of the Last Element, push a space " " to every element
-
-    array.forEach(value=>{
-
-      if(array.indexOf(value)!=lastElement){
-        newArray.push(value+" ");
-      } else newArray.push(value);
-      
-    })
-
-    this.setState({
-      sentenceArray:newArray
-    })
-
-    console.log("new array: " + newArray)
-    // return newArray;
-  }
-
-
-  updateBlockCompleteness=(point)=>{
-    console.log("blockGrade: " + this.state.blockGrade)
-    this.setState({
-      blockGrade:this.state.blockGrade+point
-    })
-
-    if(this.state.sentence.length==this.state.blockGrade){
+    if(isComplete){
 
       this.setState({
-        blockCompleteness:true,
+        markBlockComplete:true,
+        score:this.state.score+1
       })
 
-      console.log("if blockGrade" + this.state.blockGrade + "is equal to this.state.setence.length" + this.state.sentence.length)
-
     }
-
-    console.log("blockCompleteness is: " +this.state.blockCompleteness)
-
 
   }
 
   render() {
 
-    return(
+    if(this.state.score<10){
 
-      <div className="main-grid-container">
-  
-          <div className="area-A">
+      return(
 
-            <div>{this.returnSentence()}</div>
-            <div>Guess the sentence! Start Typing</div>
-            <div>The yellow blocks are meant for spaces</div>
-            <div>Score: {this.state.score}</div>
+        <div className="main-grid-container">
+    
+            <div className="area-A">
 
-          </div>
+              <Blurb key={this.state.sentence} sentence={this.state.sentence}/>
+              
+            </div>
 
-          <div className="area-B">
+            <div className="area-B">
 
-            {/* <ContainerComponent sentence={this.state.sentence}/> */}
+              <ContainerComponent key={this.state.sentence} sentence={this.state.sentence} markBlockComplete={this.markBlockComplete}/>
 
-            <div className="container">
-              {this.state.sentenceArray.map(line=>(
-              <RowComponent key={line} word={line} blockCompleteness={this.updateBlockCompleteness}/>
-              ))}
-            </div>    
+              <button hidden={!this.state.markBlockComplete} onClick={this.paginate}>Next</button>
 
-            <button onClick={this.paginate}>Next</button>
-
-          </div>
+            </div>
 
 
-      </div>
+        </div>
 
-    )
+      )
+    }
+
+    else {
+      return(
+        <div><TestComplete/></div>
+      )
+    }
   }
 
 }

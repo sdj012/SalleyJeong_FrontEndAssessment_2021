@@ -11,63 +11,34 @@ class Main extends React.Component {
     super(props);
 
     this.state={ 
-      pagination:1,
-      value:'',
-      sentence:'',
-      score:0,
+      sentence:this.props.sentence,
       sentenceArray:[],
-      gameComplete:false,
       blockGrade:1,
       blockCompleteness:false,
     }
   
   
-    this.setSentence=this.setSentence.bind(this);
-    this.returnSentence=this.returnSentence.bind(this);
-    this.getData=this.getData.bind(this);
     this.breakSentence=this.breakSentence.bind(this);
     this.updateBlockCompleteness=this.updateBlockCompleteness.bind(this);
-    this.paginate=this.paginate.bind(this);
-
-  }
-
-  setSentence=(data)=>{
-
-    this.setState({
-      sentence:data,
-    })
-
-    this.breakSentence();
-
-    console.log( "Sentence: " + this.state.sentence)
-
-  }
-
-  returnSentence=()=>{
-    return this.state.sentence;
-  }
-
-  paginate=(e)=>{
-    
-    e.preventDefault();
-    this.setState({
-      pagination:this.state.pagination+1
-    },function(){
-      this.getData();
-    })
 
   }
 
 
+  componentDidUpdate=(prevProps)=>{
 
-  getData=()=>{
-    axios.get("https://api.hatchways.io/assessment/sentences/" + this.state.pagination)
-    .then(response => this.setSentence(response["data"]["data"]["sentence"]));
+    if(prevProps.sentence !== this.props.sentence){
+        this.setState({
+             sentence:this.props.sentence
+        })
+    }
+
+    console.log("Container componentDidUpdate, this.props.sentence is : " + this.props.sentence)
   }
 
   componentDidMount=()=>{
-    this.getData();
+    this.breakSentence();
   }
+
 
 
   breakSentence=()=>{
@@ -108,7 +79,11 @@ class Main extends React.Component {
 
       this.setState({
         blockCompleteness:true,
+      },function(){
+        this.props.markBlockComplete(this.state.blockCompleteness)
       })
+
+
 
       console.log("if blockGrade" + this.state.blockGrade + "is equal to this.state.setence.length" + this.state.sentence.length)
 
@@ -123,33 +98,18 @@ class Main extends React.Component {
 
     return(
 
-      <div className="main-grid-container">
-  
-          <div className="area-A">
+      <div className="container">
 
-            <div>{this.returnSentence()}</div>
-            <div>Guess the sentence! Start Typing</div>
-            <div>The yellow blocks are meant for spaces</div>
-            <div>Score: {this.state.score}</div>
+        {this.state.sentenceArray.map(line=>(
 
-          </div>
+          <RowComponent key={line} word={line} blockCompleteness={this.updateBlockCompleteness}/>
 
-          <div className="area-B">
-
-            {/* <ContainerComponent sentence={this.state.sentence}/> */}
-
-            <div className="container">
-              {this.state.sentenceArray.map(line=>(
-              <RowComponent key={line} word={line} blockCompleteness={this.updateBlockCompleteness}/>
-              ))}
-            </div>    
-
-            <button onClick={this.paginate}>Next</button>
-
-          </div>
+        ))}
+        
+      </div> 
+      
 
 
-      </div>
 
     )
   }
