@@ -1,7 +1,4 @@
-import React, { Component } from 'react';
-import axios from 'axios';
-import ContainerComponent from './ContainerComponent';
-import RowComponent from './RowComponent.js';
+import React from 'react';
 import Scramble from './Scramble';
 
 class Blurb extends React.Component {

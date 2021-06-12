@@ -1,7 +1,5 @@
-import React, { Component } from 'react';
-import axios from 'axios';
+import React from 'react';
 import './Main.css';
-import ContainerComponent from './ContainerComponent';
 import RowComponent from './RowComponent.js';
 
 class Main extends React.Component {
@@ -54,7 +52,7 @@ class Main extends React.Component {
 
     array.forEach(value=>{
 
-      if(array.indexOf(value)!=lastElement){
+      if(array.indexOf(value)!==lastElement){
         newArray.push(value+" ");
       } else newArray.push(value);
       
@@ -75,7 +73,7 @@ class Main extends React.Component {
       blockGrade:this.state.blockGrade+point
     })
 
-    if(this.state.sentence.length==this.state.blockGrade){
+    if(this.state.sentenceArray.length===this.state.blockGrade){
 
       this.setState({
         blockCompleteness:true,

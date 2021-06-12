@@ -1,4 +1,5 @@
-import React, { Component } from 'react';
+import React from 'react';
+
 class ColumnComponent extends React.Component {
 
   constructor(props){
@@ -37,9 +38,9 @@ class ColumnComponent extends React.Component {
 
 
   returnBackgroundColor=()=>{
-    if(this.state.character===" " && this.state.correct===false) return "orange"
-    if(this.state.correct===true) return "green";
-    else return "grey";
+    if(this.state.character===" " && this.state.correct===false) return "#ffb74d"
+    if(this.state.correct===true) return "#4caf50";
+    else return "#e1e1e1";
   }
 
   componentDidMount=()=>{
@@ -60,7 +61,7 @@ class ColumnComponent extends React.Component {
     return(
 
         <div className="ColumnComponent column-style">
-          <input style={{background: this.returnBackgroundColor()}} className="column-style" type="text" onChange={(e)=>this.handleChange(this.state.character,e)}></input>{this.state.character}
+          <input style={{background: this.returnBackgroundColor()}} maxlength="1" className="column-style" type="text" onChange={(e)=>this.handleChange(this.state.character,e)}></input>
         </div>
 
     )

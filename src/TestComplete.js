@@ -1,7 +1,7 @@
-import React, { Component } from 'react';
-import axios from 'axios';
-import ContainerComponent from './ContainerComponent';
-import RowComponent from './RowComponent.js';
+import React from 'react';
+import Facebook from 'react-sharingbuttons/dist/buttons/Facebook';
+import Twitter from 'react-sharingbuttons/dist/buttons/Twitter';
+import 'react-sharingbuttons/dist/main.css'
 
 class TestComplete extends React.Component {
 
@@ -19,10 +19,17 @@ class TestComplete extends React.Component {
 
   render() {
 
+    const url = 'https://github.com/caspg/react-sharingbuttons'
+    const shareText = 'Check this site!'
+
       return(
 
         <div className="TestComplete-grid-container">
-          <div>Complete!</div>
+          <div className="complete-message">You Win!</div>
+          <div>Share the Game:
+              <Facebook url={url} />
+              <Twitter url={url} shareText={shareText} /> 
+            </div>
         </div>
 
       )

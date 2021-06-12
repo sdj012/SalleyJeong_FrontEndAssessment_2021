@@ -1,8 +1,9 @@
-import React, { Component } from 'react';
+import React from 'react';
 import axios from 'axios';
 import './Main.css';
 import ContainerComponent from './ContainerComponent';
 import Blurb from './Blurb';
+import Scramble from './Scramble';
 import TestComplete from './TestComplete';
 
 class Main extends React.Component {
@@ -82,22 +83,30 @@ class Main extends React.Component {
 
       return(
 
-        <div className="main-grid-container">
-    
-            <div className="area-A">
+        <div className="home-grid-container">
 
-              <Blurb key={this.state.sentence} sentence={this.state.sentence}/>
-              
-            </div>
+          <div className="main-grid-container">
+      
+              <div className="area-A">
 
-            <div className="area-B">
+                <Blurb key={this.state.sentence} sentence={this.state.sentence}/>
 
-              <ContainerComponent key={this.state.sentence} sentence={this.state.sentence} markBlockComplete={this.markBlockComplete}/>
+                {/* <Scramble key={this.state.sentence} sentence={this.state.sentence}/> */}
 
-              <button hidden={!this.state.markBlockComplete} onClick={this.paginate}>Next</button>
+                <div style={{fontSize:"x-large",fontWeight:"bolder"}}>Score: {this.state.score}</div>
+                
+              </div>
 
-            </div>
+              <div className="area-B">
 
+                <ContainerComponent key={this.state.sentence} sentence={this.state.sentence} markBlockComplete={this.markBlockComplete}/>
+
+                <button style={{backgroundColor:"#388e3c"}} hidden={!this.state.markBlockComplete} onClick={this.paginate}>Next</button>
+
+              </div>
+
+
+          </div>
 
         </div>
 

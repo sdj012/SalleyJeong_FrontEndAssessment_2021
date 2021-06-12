@@ -1,7 +1,4 @@
-import React, { Component } from 'react';
-import axios from 'axios';
-import ContainerComponent from './ContainerComponent';
-import RowComponent from './RowComponent.js';
+import React from 'react';
 
 class Scramble extends React.Component {
 
@@ -10,8 +7,8 @@ class Scramble extends React.Component {
     super(props);
 
     this.state={ 
-      firstLetter:'',
-      lastLetter:'',
+      firstWord:'',
+      lastWord:'',
       words:[],
       scrambled:'',
       sentence:this.props.sentence,
@@ -26,64 +23,92 @@ class Scramble extends React.Component {
 
   breakSentence=()=>{
 
+
     console.log("hit break sentence")
 
     //Split Sentence By Space
     let array=[]
     array=this.state.sentence.split(" ");
+    // array.forEach(value=>{
+    //   newArray.push(value);
+    // })
 
-    let newArray=[];
-    let lastElement=array.length-1
-
-    //With the Exception of the Last Element, push a space " " to every element
-
-    array.forEach(value=>{
-
-      if(array.indexOf(value)!=lastElement){
-        newArray.push(value);
-      } else newArray.push(value);
-      
-    })
+    let sentencefirstWord=array[0]
+    let sentencelastWord=array[array.length-1]
 
     this.setState({
-      sentenceArray:newArray
+      sentenceArray:array,
+      firstWord: sentencefirstWord,
+      lastWord:sentencelastWord
     },function(){
       this.scramble();
     })
 
-    console.log("new array: " + newArray)
+    // console.log("new array: " + newArray)
+    console.log("array: " + array)
     // return newArray;
   }
 
   scrambleWord=(word)=>{
 
-
+    console.log("this.state.firstWord : " + this.state.firstWord)
+    console.log("this.state.lastWord : " + this.state.lastWord)
     console.log("hit scrambleWord: " + word)
 
-    // if first word, remove (0) word=word.substr(1)
-    // if last word, .slice(0,-1) word=word.substr(0,word.length-1);
-
     let scrambledWord="";
+
     let randomnOrder=[]; //form a randomnly order of numbers between 1 and the lastIndex
+
     let randomnIndex="";
+    let characterArray=Array.from(word);
+
+    let firstLetter="";
+    let lastLetter="";
+
+    // If words are first or last words, trim out first or last letter
+    // Assign to block "firstLetter" and "lastLetter" 
+
+    if(word === this.state.firstWord){
+      firstLetter=characterArray.shift()
+      console.log("firstWord characterArray"+characterArray)
+      // word=word.slice(1)
+      // console.log("firstWord fixed: "  + word +"scrambledWord: " + scrambledWord) 
+    }
+
+
+    if(word === this.state.lastWord){
+      // word=word.slice(0,lastIndex-1)
+      lastLetter=characterArray.pop()
+      console.log("lastWord characterArray"+characterArray)
+      console.log("lastWord fixed: "  + word +" scrambledWord: " + scrambledWord) 
+    }
+
     let firstIndex=0
-    let lastIndex=word.length
+    let lastIndex=characterArray.length 
+
+    //Form an Array of Randomn Numbers between 0 and lastIndex - Make sure it is only as long as the word
 
     do{
-
- 
       randomnIndex=Math.floor(Math.random() * lastIndex) + firstIndex
       console.log("scrambleWord: randomnIndex: " + randomnIndex)
 
-      if(!randomnOrder.includes(randomnIndex))randomnOrder.push(randomnIndex)
+      if(!randomnOrder.includes(randomnIndex)) randomnOrder.push(randomnIndex)
 
-    }while(randomnOrder.length < word.length)
+    } while(randomnOrder.length < characterArray.length)
 
-    if(randomnOrder.length = word.length){
+    console.log("randomnOrder : " + randomnOrder)
+
+    if(randomnOrder.length === characterArray.length){
+
       randomnOrder.map(randomnIndex=>(
-        scrambledWord=scrambledWord+word.charAt(randomnIndex)
+      // scrambledWord=scrambledWord + word.charAt(randomnIndex)
+      scrambledWord=scrambledWord + characterArray[randomnIndex]
+
       ))
     }
+    
+    scrambledWord=firstLetter+scrambledWord+lastLetter
+
     console.log("randomnOrder: " + randomnOrder)
     console.log("scrambledWord Value: " + scrambledWord)
 
@@ -96,6 +121,7 @@ class Scramble extends React.Component {
   scramble=()=>{
 
     console.log("hit: scramble this.state.sentenceArray is : " + this.state.sentenceArray)
+
     let scrambledSentence=""
 
     this.state.sentenceArray.map(wordVal=>(
@@ -116,7 +142,7 @@ class Scramble extends React.Component {
 
     if(prevProps.sentence !== this.props.sentence){
         this.setState({
-             sentence:this.props.sentence
+            sentence:this.props.sentence
         })
     }
     console.log("Scramble " + this.state.sentence)
@@ -124,7 +150,6 @@ class Scramble extends React.Component {
 
   componentDidMount=()=>{
     this.breakSentence();
-    // this.scramble();
   }
   
   render() {
@@ -132,9 +157,7 @@ class Scramble extends React.Component {
       return(
 
         <div className="Scramble-grid-container">
-          Scramble: {this.state.scrambled}
-          {/* <div>this.state.scrambled</div> */}
-
+          {this.state.scrambled}
         </div>
 
       )

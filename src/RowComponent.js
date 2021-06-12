@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import ColumnComponent from './ColumnComponent';
 
 class RowComponent extends React.Component {
@@ -11,7 +11,7 @@ class RowComponent extends React.Component {
       value:'',
       word:this.props.word,
       characterArray:[],
-      rowGrade:0,
+      rowGrade:1,
       rowCompleteness:false,
     }
 
@@ -64,7 +64,7 @@ class RowComponent extends React.Component {
       rowGrade:this.state.rowGrade+point
     })
 
-    if(this.state.rowGrade=this.state.word.length){
+    if(this.state.rowGrade===this.state.word.length){
 
       this.setState({
         rowCompleteness:true,
