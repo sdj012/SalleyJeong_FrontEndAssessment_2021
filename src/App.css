@@ -1,0 +1,9 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans');
+
+.App {
+  text-align: center;
+  height:100vh;
+  width:100vw;
+  font-family: 'Open Sans';
+  background-color: #e1e1e1;
+}

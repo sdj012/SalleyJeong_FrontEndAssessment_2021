@@ -1,0 +1,169 @@
+/* ===============
+Styling Properties For All Components And Elements Nested In Main.js
+=============== */
+
+/* Test Complete Component */
+.TestComplete-grid-container{
+  background-color: #e1e1e1;
+  padding-top:10%;
+  padding-left: 10%;
+  padding-right:10%;
+  padding-bottom:10%;
+}
+
+  .complete-message{
+    background-color:white;
+    height:15vh;
+    width:80vw;
+    padding-top:2%;
+    padding-bottom:2%;
+    font-size: x-large;
+    color:rgb(20, 20, 139);
+    font-weight: bolder;
+    border-radius: 25px;
+  }
+
+  .complete-message > button{
+    border:none;
+    height:45px;
+    width:100px;
+    background-color:#388e3c;
+    font-size:large;
+    font-weight: bolder;
+
+  }
+  
+
+/* Outer Wrapper */
+.home-grid-container{
+  padding-top:10%;
+  padding-left: 10%;
+  padding-right:10%;
+  padding-bottom:10%;
+  background-color: #e1e1e1;
+}
+
+
+
+/* Inner Wrapper */
+
+.main-grid-container{
+  border-radius: 25px;
+  height:100%;
+  width:100%;
+
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr 1fr;
+  gap: 0px 0px;
+  grid-auto-flow: row;
+  grid-template-areas:
+    "."
+    ".";
+  
+  background-color: white;
+}
+
+
+
+/* Wrapper - Area A */
+
+.area-A{
+  border-radius: 25px;
+  padding-top:5%;
+  align-self: center;
+  justify-self: center;
+  height:50vh;
+  width:80vw;
+  background-color:white;
+  line-height: 8vh;
+}
+
+  /* Blurb Component */
+
+  .Blurb-grid-container{
+    font-size: x-large;
+    color:rgb(0, 0, 0);
+  }
+
+  /* Scramble Component */
+
+  .Scramble-grid-container{
+    font-size:50px;
+    color:rgb(27, 27, 167);
+    font-weight: bolder;
+    padding-bottom:3%;
+  }
+
+
+
+/* Wrapper - Area B */
+
+.area-B{
+  border-radius: 25px;
+  align-self: center;
+  justify-self: center;
+  height:50vh;
+  width:80vw;
+  background-color:white;
+  margin-bottom:5%;
+}
+
+
+  /* ContainerComponent */
+
+  .container{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+  }
+
+  /* Score */
+  .score{
+    font-size:x-large;
+    font-weight:bolder;
+  }
+
+/* Next Button */
+.next{
+  background-color:#388e3c;
+}
+
+
+/* Row Component */
+
+.RowComponent{
+  display:flex;
+  flex-direction: row;
+  justify-content: flex-start;
+}
+
+
+/* Column Component */
+
+.column-style{
+  width: 100%;
+  height:40%;
+  border:none;
+  margin: 5px 5px 5px 5px;
+}
+
+.column-style > input{  
+  padding-left:50%;
+  height:70px;
+  color:white;
+  font-size:xx-large;
+}
+
+button{
+  border:none;
+  height:45px;
+  width:100px;
+  margin-top:10%;
+  color:white;
+  background-color:#388e3c;
+  font-size:xx-large;
+  font-weight: bolder;
+}
+
+
