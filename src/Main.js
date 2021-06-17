@@ -24,7 +24,6 @@ class Main extends React.Component {
     this.setSentence=this.setSentence.bind(this);
     this.markBlockComplete=this.markBlockComplete.bind(this);
     this.detectEnter=this.detectEnter.bind(this);
-
   }
 
   componentDidMount=()=>{
@@ -61,10 +60,10 @@ class Main extends React.Component {
   }
 
   detectEnter=(event)=>{
+    console.log("enter pressed")
     event.preventDefault();
-    if(event.keyCode === 13) this.paginate(event);
 
-
+    if(event.keyCode === 13)this.paginate(event);
 
   }
 

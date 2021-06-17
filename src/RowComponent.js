@@ -8,7 +8,6 @@ class RowComponent extends React.Component {
     super(props);
 
     this.state={ 
-      value:'',
       word:this.props.word,
       characterArray:[],
       rowGrade:1,

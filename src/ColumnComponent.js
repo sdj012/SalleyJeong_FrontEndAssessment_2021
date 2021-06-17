@@ -7,18 +7,19 @@ class ColumnComponent extends React.Component {
     super(props);
 
     this.state={ 
-      value:'',
       character:this.props.character,
-      refId:this.props.refId,
       correct:false,
+      refId:this.props.refId,
     }    
 
     this.handleChange=this.handleChange.bind(this);
+    this.returnActiveness=this.returnActiveness.bind(this);
   }
 
   handleChange(answer,event){ // Update the Column's Completeness to Parent Component - Container Component
 
     let entry=event.target.value.toLowerCase()
+
     if(entry===answer){
 
       this.setState({
@@ -51,6 +52,11 @@ class ColumnComponent extends React.Component {
       }
   }
 
+  returnActiveness=()=>{
+    if(this.state.correct===true)return 1; // If Already Filled, Set "Disabled" To True. Else, Leave Open.
+    else return 0; 
+  }
+
 
   render() {
 
@@ -60,8 +66,8 @@ class ColumnComponent extends React.Component {
 
         <div className="ColumnComponent column-style">
 
-          <input ref={(ip)=> this["ipRef" + this.state.refId] = ip} style={{background: this.returnBackgroundColor()}} maxLength="1" className="column-style" type="text" onChange={(e)=>this.handleChange(this.state.character,e)}></input>
-        
+          <input ref={(ip)=> this["ipRef" + this.state.refId] = ip} disabled={this.returnActiveness()} style={{background: this.returnBackgroundColor()}} maxLength="1" className="column-style" type="text" onChange={(e)=>this.handleChange(this.state.character,e)}></input>
+
         </div>
 
     )

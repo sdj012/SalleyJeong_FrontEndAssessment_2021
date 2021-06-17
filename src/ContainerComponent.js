@@ -31,8 +31,7 @@ class ContainerComponent extends React.Component {
   }
 
   componentDidMount=()=>{
-    this.breakSentence();
-
+    this.breakSentence(); 
   }
 
 
@@ -64,15 +63,17 @@ class ContainerComponent extends React.Component {
 
   updateBlockCompleteness=(point)=>{ // Update the Block's Completeness to Parent Component - Main
 
+    
+
     this.setState({
       blockGrade:this.state.blockGrade+point
     })
 
-    if(this.state.blockGrade < this.state.wordArray.length){ 
+    if(this.state.blockGrade < this.state.wordArray.length){  // As Long As The Block Is Not Completed, Once Each Row is Complete, Pass Focus To The Next Row
       this["row"+this.state.blockGrade]["column"+0]["ipRef"+0].focus() 
     }
 
-    if(this.state.blockGrade === this.state.wordArray.length){
+    if(this.state.blockGrade === this.state.wordArray.length){ 
 
       this.setState({
         blockCompleteness:true,
