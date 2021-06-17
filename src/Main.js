@@ -61,8 +61,10 @@ class Main extends React.Component {
   }
 
   detectEnter=(event)=>{
-
+    event.preventDefault();
     if(event.keyCode === 13) this.paginate(event);
+
+
 
   }
 
@@ -84,7 +86,7 @@ class Main extends React.Component {
 
     /* If Game Is Complete: Render Test Complete Component*/
 
-    if(this.state.score == this.state.numberOfSentences){ 
+    if(this.state.score === this.state.numberOfSentences){ 
 
       return(
 
@@ -120,7 +122,7 @@ class Main extends React.Component {
 
               <ContainerComponent key={this.state.sentence} sentence={this.state.sentence} markBlockComplete={this.markBlockComplete}/>
 
-              <button className="next" hidden={!this.state.markBlockComplete} onClick={this.paginate} onKeyDown={this.detectEnter}>Next</button>
+              <button className="next" onClick={this.paginate} hidden={!this.state.markBlockComplete} onKeyDown={this.detectEnter}>Next</button>
 
             </div>
 

@@ -32,6 +32,7 @@ class ContainerComponent extends React.Component {
 
   componentDidMount=()=>{
     this.breakSentence();
+
   }
 
 
@@ -67,7 +68,11 @@ class ContainerComponent extends React.Component {
       blockGrade:this.state.blockGrade+point
     })
 
-    if(this.state.wordArray.length===this.state.blockGrade){
+    if(this.state.blockGrade < this.state.wordArray.length){ 
+      this["row"+this.state.blockGrade]["column"+0]["ipRef"+0].focus() 
+    }
+
+    if(this.state.blockGrade === this.state.wordArray.length){
 
       this.setState({
         blockCompleteness:true,
@@ -87,8 +92,8 @@ class ContainerComponent extends React.Component {
 
       <div className="container">
 
-        {this.state.wordArray.map(line=>(
-          <RowComponent key={line} word={line} blockCompleteness={this.updateBlockCompleteness}/>
+        {this.state.wordArray.map((line,index)=>(
+          <RowComponent ref={(ro)=>this["row" + index] = ro} key={line} word={line} blockCompleteness={this.updateBlockCompleteness}/>
         ))}
         
       </div> 

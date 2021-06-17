@@ -14,7 +14,8 @@ class RowComponent extends React.Component {
       rowGrade:1,
       rowCompleteness:false,
     }
-
+    
+    this.column=React.createRef();
     this.createArrayOfCharacters=this.createArrayOfCharacters.bind(this);
     this.updateRowCompleteness=this.updateRowCompleteness.bind(this);  
 
@@ -26,8 +27,13 @@ class RowComponent extends React.Component {
     let characters=[]
 
     for(let i=0;i<this.state.word.length;i++){
-      characters.push(this.state.word[i])
+
+      let characterObject={'character':this.state.word[i], 'refId':i}
+
+      characters.push(characterObject)
     }
+
+
 
     this.setState({
       characterArray:characters
@@ -37,7 +43,8 @@ class RowComponent extends React.Component {
 
   componentDidMount=()=>{ // On Mount: Convert The Passed Word Into An Array of Characters
 
-    this.createArrayOfCharacters();
+    this.createArrayOfCharacters();    
+
   }
 
   componentDidUpdate=(prevProps)=>{
@@ -55,6 +62,10 @@ class RowComponent extends React.Component {
     this.setState({
       rowGrade:this.state.rowGrade+point
     })
+
+    if(this.state.rowGrade < this.state.word.length){ 
+      this["column"+this.state.rowGrade]["ipRef"+this.state.rowGrade].focus() 
+    };
 
     if(this.state.rowGrade===this.state.word.length){
 
@@ -78,7 +89,7 @@ class RowComponent extends React.Component {
       <div className="RowComponent">
 
         {this.state.characterArray.map((character,index)=>(
-          <ColumnComponent key={index} character={character} updateRowCompleteness={this.updateRowCompleteness}/>
+          <ColumnComponent ref={(col)=>this["column"+index] = col} refId={index} key={index} character={character.character} updateRowCompleteness={this.updateRowCompleteness}/>
         ))}
         
       </div>

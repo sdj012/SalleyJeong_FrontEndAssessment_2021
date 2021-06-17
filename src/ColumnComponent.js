@@ -9,9 +9,10 @@ class ColumnComponent extends React.Component {
     this.state={ 
       value:'',
       character:this.props.character,
+      refId:this.props.refId,
       correct:false,
-    }
-    
+    }    
+
     this.handleChange=this.handleChange.bind(this);
   }
 
@@ -23,10 +24,15 @@ class ColumnComponent extends React.Component {
       this.setState({
         correct:true,
       })
+
       this.props.updateRowCompleteness(1)
     }
 
 
+  }
+
+  componentDidMount=()=>{
+    this[this.state.refId]=React.createRef();
   }
 
 
@@ -44,7 +50,8 @@ class ColumnComponent extends React.Component {
           })
       }
   }
-  
+
+
   render() {
 
     return(
@@ -53,7 +60,7 @@ class ColumnComponent extends React.Component {
 
         <div className="ColumnComponent column-style">
 
-          <input autoFocus style={{background: this.returnBackgroundColor()}} maxLength="1" className="column-style" type="text" onChange={(e)=>this.handleChange(this.state.character,e)}></input>
+          <input ref={(ip)=> this["ipRef" + this.state.refId] = ip} style={{background: this.returnBackgroundColor()}} maxLength="1" className="column-style" type="text" onChange={(e)=>this.handleChange(this.state.character,e)}></input>
         
         </div>
 
