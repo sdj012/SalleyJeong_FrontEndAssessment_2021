@@ -1,4 +1,5 @@
 import React from 'react';
+import { Next } from 'react-bootstrap/esm/PageItem';
 
 class ColumnComponent extends React.Component {
 
@@ -26,7 +27,9 @@ class ColumnComponent extends React.Component {
         correct:true,
       })
 
-      this.props.updateRowCompleteness(1)
+      this["ipRef" + this.state.refId].blur();
+
+      this.props.updateRowCompleteness(1);
     }
 
 

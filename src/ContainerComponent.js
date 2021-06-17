@@ -1,6 +1,7 @@
 import React from 'react';
 import './Main.css';
 import RowComponent from './RowComponent.js';
+import NextButton from './NextButton';
 
 class ContainerComponent extends React.Component {
 
@@ -17,6 +18,7 @@ class ContainerComponent extends React.Component {
   
     this.breakSentence=this.breakSentence.bind(this);
     this.updateBlockCompleteness=this.updateBlockCompleteness.bind(this);
+    this.callPaginate=this.callPaginate.bind(this);
 
   }
 
@@ -32,6 +34,7 @@ class ContainerComponent extends React.Component {
 
   componentDidMount=()=>{
     this.breakSentence(); 
+    // this["column"+1]["ipRef"+this.state.rowGrade].focus() 
   }
 
 
@@ -63,8 +66,6 @@ class ContainerComponent extends React.Component {
 
   updateBlockCompleteness=(point)=>{ // Update the Block's Completeness to Parent Component - Main
 
-    
-
     this.setState({
       blockGrade:this.state.blockGrade+point
     })
@@ -79,10 +80,15 @@ class ContainerComponent extends React.Component {
         blockCompleteness:true,
       },function(){
         this.props.markBlockComplete(this.state.blockCompleteness)
-      })
+        this["NextButton"]["buttonInput"].focus() 
+      })  
 
     }
 
+  }
+
+  callPaginate=(e)=>{
+    this.props.callPaginate(e);
   }
 
   render() {
@@ -96,6 +102,8 @@ class ContainerComponent extends React.Component {
         {this.state.wordArray.map((line,index)=>(
           <RowComponent ref={(ro)=>this["row" + index] = ro} key={line} word={line} blockCompleteness={this.updateBlockCompleteness}/>
         ))}
+
+        <div hidden={!this.state.blockCompleteness}><NextButton ref={(ro)=>this["NextButton"] = ro} callPaginate={this.callPaginate}/></div>
         
       </div> 
       

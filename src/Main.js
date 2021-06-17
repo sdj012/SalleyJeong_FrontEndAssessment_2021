@@ -4,6 +4,7 @@ import './Main.css';
 import Blurb from './Blurb';
 import ContainerComponent from './ContainerComponent';
 import TestComplete from './TestComplete';
+import NextButton  from './NextButton';
 
 class Main extends React.Component {
   
@@ -63,7 +64,7 @@ class Main extends React.Component {
     console.log("enter pressed")
     event.preventDefault();
 
-    if(event.keyCode === 13)this.paginate(event);
+    if(event.keyCode === 13 )this.paginate(event);
 
   }
 
@@ -119,9 +120,7 @@ class Main extends React.Component {
 
             <div className="area-B"> 
 
-              <ContainerComponent key={this.state.sentence} sentence={this.state.sentence} markBlockComplete={this.markBlockComplete}/>
-
-              <button className="next" onClick={this.paginate} hidden={!this.state.markBlockComplete} onKeyDown={this.detectEnter}>Next</button>
+              <ContainerComponent key={this.state.sentence} sentence={this.state.sentence} markBlockComplete={this.markBlockComplete} callPaginate={this.paginate}/>
 
             </div>
 
