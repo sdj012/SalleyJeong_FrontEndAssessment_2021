@@ -3,7 +3,7 @@ import './Main.css';
 import RowComponent from './RowComponent.js';
 import NextButton from './NextButton';
 
-class ContainerComponent extends React.Component {
+class BlockComponent extends React.Component {
 
   constructor(props){
 
@@ -33,8 +33,9 @@ class ContainerComponent extends React.Component {
   }
 
   componentDidMount=()=>{
-    this.breakSentence(); 
-    // this["column"+1]["ipRef"+this.state.rowGrade].focus() 
+    
+    this.breakSentence();
+
   }
 
 
@@ -66,23 +67,23 @@ class ContainerComponent extends React.Component {
 
   updateBlockCompleteness=(point)=>{ // Update the Block's Completeness to Parent Component - Main
 
-    this.setState({
-      blockGrade:this.state.blockGrade+point
-    })
-
-    if(this.state.blockGrade < this.state.wordArray.length){  // As Long As The Block Is Not Completed, Once Each Row is Complete, Pass Focus To The Next Row
-      this["row"+this.state.blockGrade]["column"+0]["ipRef"+0].focus() 
-    }
-
-    if(this.state.blockGrade === this.state.wordArray.length){ 
-
       this.setState({
-        blockCompleteness:true,
-      },function(){
-        this.props.markBlockComplete(this.state.blockCompleteness)
-        this["NextButton"]["buttonInput"].focus() 
-      })  
+        blockGrade:this.state.blockGrade+point
+      })
 
+      if(this.state.blockGrade < this.state.wordArray.length){  // As Long As The Block Is Not Completed, Once Each Row is Complete, Pass Focus To The Next Row
+        this["row"+this.state.blockGrade]["column"+0]["ipRef"+0].focus() 
+      }
+
+      if(this.state.blockGrade === this.state.wordArray.length){ 
+
+        this.setState({
+          blockCompleteness:true,
+        },function(){
+          this.props.markBlockComplete(this.state.blockCompleteness)
+          this["NextButton"]["buttonInput"].focus()  // Give Focus To The 'Next Button'
+        })  
+    
     }
 
   }
@@ -100,7 +101,9 @@ class ContainerComponent extends React.Component {
       <div className="container">
 
         {this.state.wordArray.map((line,index)=>(
+
           <RowComponent ref={(ro)=>this["row" + index] = ro} key={line} word={line} blockCompleteness={this.updateBlockCompleteness}/>
+
         ))}
 
         <div hidden={!this.state.blockCompleteness}><NextButton ref={(ro)=>this["NextButton"] = ro} callPaginate={this.callPaginate}/></div>
@@ -115,4 +118,4 @@ class ContainerComponent extends React.Component {
 
 }
 
-export default ContainerComponent;
+export default BlockComponent;

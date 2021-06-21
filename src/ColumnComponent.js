@@ -10,6 +10,7 @@ class ColumnComponent extends React.Component {
     this.state={ 
       character:this.props.character,
       correct:false,
+      rowId:this.props.rowId,
       refId:this.props.refId,
     }    
 
@@ -36,7 +37,10 @@ class ColumnComponent extends React.Component {
   }
 
   componentDidMount=()=>{
-    this[this.state.refId]=React.createRef();
+    if(this.state.refId===0 && this.state.rowId===1) {
+      console.log("this.state.refId===0 && this.state.rowId===1")
+      this["ipRef" + this.state.refId].focus();
+    }
   }
 
 

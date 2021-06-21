@@ -44,6 +44,10 @@ class RowComponent extends React.Component {
 
     this.createArrayOfCharacters();    
 
+    this.state.characterArray.map((word,index)=>{
+      this["column"+index]=React.createRef()
+    })
+
   }
 
   componentDidUpdate=(prevProps)=>{
@@ -63,7 +67,7 @@ class RowComponent extends React.Component {
     })
 
     if(this.state.rowGrade < this.state.word.length){ 
-      this["column"+this.state.rowGrade]["ipRef"+this.state.rowGrade].focus() 
+      this["column"+this.state.rowGrade]["ipRef"+this.state.rowGrade].focus() // Give Focus To Next Element Through Refs , Which Happens To Correspond With The Current rowGrade
     };
 
     if(this.state.rowGrade===this.state.word.length){
@@ -88,7 +92,7 @@ class RowComponent extends React.Component {
       <div className="RowComponent">
 
         {this.state.characterArray.map((character,index)=>(
-          <ColumnComponent ref={(col)=>this["column"+index] = col} refId={index} key={index} character={character.character} updateRowCompleteness={this.updateRowCompleteness}/>
+          <ColumnComponent ref={(col)=>this["column"+index] = col} rowId={this.state.rowGrade} refId={index} key={index} character={character.character} updateRowCompleteness={this.updateRowCompleteness}/>
         ))}
         
       </div>

@@ -2,7 +2,7 @@ import React from 'react';
 import axios from 'axios';
 import './Main.css';
 import Blurb from './Blurb';
-import ContainerComponent from './ContainerComponent';
+import BlockComponent from './BlockComponent';
 import TestComplete from './TestComplete';
 import NextButton  from './NextButton';
 
@@ -32,6 +32,7 @@ class Main extends React.Component {
   }
 
   getData=()=>{
+
     axios.get("https://api.hatchways.io/assessment/sentences/" + this.state.pagination)
     .then(response => this.setSentence(response["data"]["data"]["sentence"]));
   }
@@ -120,7 +121,7 @@ class Main extends React.Component {
 
             <div className="area-B"> 
 
-              <ContainerComponent key={this.state.sentence} sentence={this.state.sentence} markBlockComplete={this.markBlockComplete} callPaginate={this.paginate}/>
+              <BlockComponent key={this.state.sentence} sentence={this.state.sentence} markBlockComplete={this.markBlockComplete} callPaginate={this.paginate}/>
 
             </div>
 
