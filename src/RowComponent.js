@@ -29,8 +29,6 @@ class RowComponent extends React.Component {
       characters.push(this.state.word[i])
     }
 
-
-
     this.setState({
       characterArray:characters
     })
