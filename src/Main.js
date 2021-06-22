@@ -4,7 +4,6 @@ import './Main.css';
 import Blurb from './Blurb';
 import BlockComponent from './BlockComponent';
 import TestComplete from './TestComplete';
-import NextButton  from './NextButton';
 
 class Main extends React.Component {
   
