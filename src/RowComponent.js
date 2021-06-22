@@ -26,10 +26,7 @@ class RowComponent extends React.Component {
     let characters=[]
 
     for(let i=0;i<this.state.word.length;i++){
-
-      let characterObject={'character':this.state.word[i], 'refId':i}
-
-      characters.push(characterObject)
+      characters.push(this.state.word[i])
     }
 
 
@@ -43,10 +40,6 @@ class RowComponent extends React.Component {
   componentDidMount=()=>{ // On Mount: Convert The Passed Word Into An Array of Characters
 
     this.createArrayOfCharacters();    
-
-    this.state.characterArray.map((character,index)=>{
-      this["column"+index]=React.createRef()
-    })
 
   }
 
@@ -92,7 +85,7 @@ class RowComponent extends React.Component {
       <div className="RowComponent">
 
         {this.state.characterArray.map((character,index)=>(
-          <ColumnComponent ref={(col)=>this["column"+index] = col} refId={index} key={index} character={character.character} updateRowCompleteness={this.updateRowCompleteness}/>
+          <ColumnComponent ref={(col)=>this["column"+index] = col} refId={index} key={index} character={character} updateRowCompleteness={this.updateRowCompleteness}/>
         ))}
         
       </div>
