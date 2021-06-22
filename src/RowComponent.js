@@ -92,7 +92,7 @@ class RowComponent extends React.Component {
       <div className="RowComponent">
 
         {this.state.characterArray.map((character,index)=>(
-          <ColumnComponent ref={(col)=>this["column"+index] = col} rowId={this.state.rowGrade} refId={index} key={index} character={character.character} updateRowCompleteness={this.updateRowCompleteness}/>
+          <ColumnComponent ref={(col)=>this["column"+index] = col} refId={index} key={index} character={character.character} updateRowCompleteness={this.updateRowCompleteness}/>
         ))}
         
       </div>

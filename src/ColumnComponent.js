@@ -8,9 +8,8 @@ class ColumnComponent extends React.Component {
 
     this.state={ 
       character:this.props.character,
-      correct:false,
-      rowId:this.props.rowId,
       refId:this.props.refId,
+      correct:false,
     }    
 
     this.handleChange=this.handleChange.bind(this);
