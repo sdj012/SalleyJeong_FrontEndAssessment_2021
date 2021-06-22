@@ -40,10 +40,9 @@ class BlockComponent extends React.Component {
 
 
 
-  breakSentence=()=>{ // Convert State String to an Array of Words
+  breakSentence=()=>{ // Convert Sentence String to An Array
 
     // Retrieve Words By Splitting Sentence By Space
-    // Add A Space To All Words Except The Last
 
     let arrayOfWords=[]
     arrayOfWords=this.state.sentence.split(" ");
@@ -54,8 +53,8 @@ class BlockComponent extends React.Component {
 
     arrayOfWords.forEach(value=>{
 
-      if(arrayOfWords.indexOf(value)!==lastElement){
-        arrayWithSpacing.push(value + " ");
+      if(arrayOfWords.indexOf(value)!==lastElement){ // Add Space To All Words Except The Last
+        arrayWithSpacing.push(value + " "); 
       } else arrayWithSpacing.push(value);
       
     })
@@ -69,13 +68,14 @@ class BlockComponent extends React.Component {
 
   updateBlockCompleteness=(point)=>{ // Update the Block's Completeness to Parent Component - Main
 
+      if(this.state.blockGrade < this.state.wordArray.length){  // As Long As The Block Is Not Completed, Once Each Row is Complete, Pass Focus To The Next Row
+        this["row"+this.state.blockGrade]["column"+0]["ipRef"+0].focus() 
+      }
+
       this.setState({
         blockGrade:this.state.blockGrade+point
       })
 
-      if(this.state.blockGrade < this.state.wordArray.length){  // As Long As The Block Is Not Completed, Once Each Row is Complete, Pass Focus To The Next Row
-        this["row"+this.state.blockGrade]["column"+0]["ipRef"+0].focus() 
-      }
 
       if(this.state.blockGrade === this.state.wordArray.length){ 
 
@@ -83,7 +83,7 @@ class BlockComponent extends React.Component {
           blockCompleteness:true,
         },function(){
           this.props.markBlockComplete(this.state.blockCompleteness)
-          this["NextButton"]["buttonInput"].focus()  // Give Focus To The 'Next Button'
+          this["NextButton"]["buttonInput"].focus()  // Once Block Complete, Give Focus To The 'Next Button'
         })  
     
     }

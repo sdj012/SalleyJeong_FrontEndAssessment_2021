@@ -7,7 +7,6 @@ class NextButton extends React.Component {
 
     super(props);
     
-
     this.enter=this.enter.bind(this);
   }
 
