@@ -1,5 +1,5 @@
 import React from 'react';
-import ColumnComponent from './ColumnComponent';
+import ColumnComponent from './Column/ColumnComponent';
 
 class RowComponent extends React.Component {
 

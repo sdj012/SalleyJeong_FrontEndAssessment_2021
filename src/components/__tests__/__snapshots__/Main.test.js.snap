@@ -1,0 +1,66 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`matches snapshot 1`] = `
+<div
+  className="home-grid-container"
+  data-testid="main-test"
+>
+  <div
+    className="main-grid-container"
+  >
+    <div
+      className="area-A"
+    >
+      <div
+        className="Blurb-grid-container"
+      >
+        <div
+          className="Scramble-grid-container"
+          id="scrambled-word"
+        >
+           
+        </div>
+        <div>
+          Guess the sentence! Start Typing
+        </div>
+        <div>
+          The yellow blocks are meant for spaces
+        </div>
+      </div>
+      <div
+        className="score"
+      >
+         Score: 
+        0
+      </div>
+    </div>
+    <div
+      className="area-B"
+    >
+      <div
+        className="container"
+        data-testid="block-test"
+      >
+        <div
+          className="RowComponent"
+        />
+        <div
+          hidden={true}
+        >
+          <div
+            className="NextButton-grid-container"
+          >
+            <button
+              className="next"
+              onClick={[Function]}
+              onKeyDown={[Function]}
+            >
+              Next
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;

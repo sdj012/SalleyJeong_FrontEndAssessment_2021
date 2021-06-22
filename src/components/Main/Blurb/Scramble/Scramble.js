@@ -118,7 +118,7 @@ class Scramble extends React.Component {
   
   componentDidUpdate=(prevProps)=>{
 
-    if(prevProps.sentence !== this.props.sentence){ //Keep State Updated As Props Updates
+    if(prevProps.sentence !== this.props.sentence){ // Keep State Updated As Parent Updates Props
         this.setState({
             sentence:this.props.sentence
         })
@@ -126,7 +126,7 @@ class Scramble extends React.Component {
 
   }
 
-  componentDidMount=()=>{ // When Component Mounts, Creatie The Scramble By Generating An Array
+  componentDidMount=()=>{ // When Component Mounts, Create Begin By Generating An Array Of Words From Passed Sentence
 
     this.breakSentence();
 

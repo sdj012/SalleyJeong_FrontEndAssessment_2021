@@ -1,5 +1,5 @@
 import React from 'react';
-import Scramble from './Scramble';
+import Scramble from './Scramble/Scramble';
 
 class Blurb extends React.Component {
 

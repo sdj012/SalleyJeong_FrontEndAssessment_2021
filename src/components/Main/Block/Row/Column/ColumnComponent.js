@@ -26,7 +26,7 @@ class ColumnComponent extends React.Component {
         correct:true,
       })
 
-      this["ipRef" + this.state.refId].blur(); // Remove Focus From Input
+      this["ipRef" + this.state.refId].blur(); // Once Column Is Complete, Remove Focus From Input
 
       this.props.updateRowCompleteness(1); 
     } 
@@ -54,7 +54,7 @@ class ColumnComponent extends React.Component {
 
   returnActiveness=()=>{
 
-    if(this.state.correct===true) return 1; // When Filled, Set "Disabled" To True. Else, Leave Open.
+    if(this.state.correct===true) return 1; // When Column Complete, Set "Disabled" To True. Else, Leave Open.
     else return 0; 
 
   }
@@ -64,7 +64,7 @@ class ColumnComponent extends React.Component {
 
     return(
 
-        // Generate An Input Field For The Character. Pass The Answer Value As Well To 'On Handle Change'
+        // Generate An Input Field For Character. Pass The Answer Value As Well To 'On Handle Change'
 
         <div className="ColumnComponent column-style">
 

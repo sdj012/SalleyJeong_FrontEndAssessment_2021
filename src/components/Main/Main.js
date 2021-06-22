@@ -1,13 +1,12 @@
 import React from 'react';
 import axios from 'axios';
 import './Main.css';
-import Blurb from './Blurb';
-import BlockComponent from './BlockComponent';
-import TestComplete from './TestComplete';
+import Blurb from './Blurb/Blurb';
+import BlockComponent from './Block/BlockComponent';
+import TestComplete from './TestComplete/TestComplete';
 
 class Main extends React.Component {
   
-
   constructor(props){
 
     super(props);
@@ -61,14 +60,14 @@ class Main extends React.Component {
   }
 
   detectEnter=(event)=>{
-    console.log("enter pressed")
+
     event.preventDefault();
 
     if(event.keyCode === 13 )this.paginate(event);
 
   }
 
-  /*Receives Data Regarding Completeness From Child Component and Communicates To State To Update 'Score'*/
+  /* Receives Data OnCompleteness From Child Component and Communicates To State To Update 'Score' */
 
   markBlockComplete=(isComplete)=>{
 
@@ -95,14 +94,14 @@ class Main extends React.Component {
         </div>
 
       )
-    }
 
+    }
 
     else { /* Else: Render Quizzes Generated From Fetched Data*/
 
       return(
 
-        <div className="home-grid-container">
+        <div className="home-grid-container" data-testid="main-test">
 
         <div className="main-grid-container">
 

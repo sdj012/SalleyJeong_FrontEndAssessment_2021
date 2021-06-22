@@ -1,6 +1,6 @@
 import React from 'react';
-import './Main.css';
-import RowComponent from './RowComponent.js';
+import '../Main.css';
+import RowComponent from './Row/RowComponent.js';
 import NextButton from './NextButton';
 
 class BlockComponent extends React.Component {
@@ -99,7 +99,7 @@ class BlockComponent extends React.Component {
 
       // Generate 'Row Components' From The State's Array Of Words
 
-      <div className="container">
+      <div className="container" data-testid="block-test">
 
         {this.state.wordArray.map((line,index)=>(
 
