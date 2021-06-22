@@ -24,20 +24,21 @@ class Scramble extends React.Component {
 
     let words=[]
     words=this.state.sentence.split(" ");
+
     let sentencefirstWord=words[0] // Store To State: First Word
-    let sentencelastWord=words[words.length-1] //Store To State: Last Word
+    let sentencelastWord=words[words.length-1] // Store To State: Last Word
 
-    this.setState({
+      this.setState({
 
-      words:words,
-      firstWord: sentencefirstWord,
-      lastWord:sentencelastWord
+        words:words,
+        firstWord: sentencefirstWord,
+        lastWord:sentencelastWord
 
-    },function(){
+      },function(){
 
-      this.scramble();
+        this.scramble();
 
-    })
+      })
 
   }
   
@@ -51,17 +52,21 @@ class Scramble extends React.Component {
       
     ))
 
-    this.setState({
-      scrambled:scrambledSentence // Save The Scrambled Sentence To The State
-    },function(){
-      return;
-    })
+      this.setState({
+
+        scrambled:scrambledSentence // Save The Scrambled Sentence To The State
+
+      },function(){
+        return;
+      })
 
   }
 
   scrambleWord=(word)=>{ // Scramble Words Passed By this.scramble. Do Not Change Positions Of: First Character,Last Character, Words Less Than < or Equal = To 2 Characters In Length
+    
+    if(word.length <= 2) return word; // If Word Is 2 Letters Long Or Less, Do Not Scramble.
 
-    if(word.length <= 2) return word;
+    let scrambledWord="";
 
     let characterArray=Array.from(word);
     
@@ -71,50 +76,48 @@ class Scramble extends React.Component {
     let randomnOrder=[]; 
     let randomnIndex="";
     
-    let scrambledWord="";
-    
-
-    if(word === this.state.firstWord){
+    if(word === this.state.firstWord){ //If The Word Is The First Word Of The Sentence, Remove and Store First Letter Seperately
       firstLetter=characterArray.shift()
     }
 
-    if(word === this.state.lastWord){
-
+    if(word === this.state.lastWord){ //If The Word Is The Last Word Of The Sentence, Remove and Store First Letter Seperately
       lastLetter=characterArray.pop()
     }
 
-    let firstIndex=0
-    let lastIndex=characterArray.length 
+    let MinVal=0
+    let MaxVal=characterArray.length 
 
-    // Form An Array Of Randomnly Aligned Numbers. Must Be: As Long As The Word & Composed Of Values between 0 and a Max Value Equal = To The Length Of The Word
+    // Generate An Array Of Randomnly Aligned Numbers 'randomnOrder[]'. Must Be: As Long As The Word & Composed Of Values Between 0 and A Non-Inclusive Max Value = Equal To The Length Of The Word
 
     do{
-      randomnIndex=Math.floor(Math.random() * lastIndex) + firstIndex
+      randomnIndex=Math.floor(Math.random() * MaxVal) + MinVal
 
       if(!randomnOrder.includes(randomnIndex)) randomnOrder.push(randomnIndex)
 
-    } while(randomnOrder.length < characterArray.length)
+    } while(randomnOrder.length < characterArray.length) 
 
 
-    if(randomnOrder.length === characterArray.length){
+    if(randomnOrder.length === characterArray.length){ // Retrieve And Store The Word's Values At Randomn Indexes
 
       randomnOrder.map(randomnIndex=>(
-      scrambledWord=scrambledWord + characterArray[randomnIndex]
-
+        scrambledWord+=characterArray[randomnIndex]
       ))
     }
+
+    // If The Word Is The First Word Of Sentence, Line Will Add The First Letter Sliced Earlier. Variable lastLetter Will Be Empty.
+    // If The Word Is The Last Word Of Sentence, Line Will Add The Last Letter Sliced Earlier. Variable first Letter Will Be Empty.
+    // If Neither The First Word Or Last Word, Both 'firstLetter' and 'lastLetter' Variables Are Empty.
     
-    scrambledWord=firstLetter+scrambledWord+lastLetter
+    scrambledWord = firstLetter + scrambledWord + lastLetter 
 
     return scrambledWord;
 
   }
 
   
-
   componentDidUpdate=(prevProps)=>{
 
-    if(prevProps.sentence !== this.props.sentence){
+    if(prevProps.sentence !== this.props.sentence){ //Keep State Updated As Props Updates
         this.setState({
             sentence:this.props.sentence
         })
@@ -122,8 +125,10 @@ class Scramble extends React.Component {
 
   }
 
-  componentDidMount=()=>{ //As Component Mounts, Start Creating the Scramble by Coverting the String to an Array
+  componentDidMount=()=>{ // When Component Mounts, Start Creating the Scramble by Coverting the String to an Array
+
     this.breakSentence();
+
   }
   
   render() {

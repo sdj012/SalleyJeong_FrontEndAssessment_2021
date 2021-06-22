@@ -1,5 +1,4 @@
 import React from 'react';
-import { Next } from 'react-bootstrap/esm/PageItem';
 
 class ColumnComponent extends React.Component {
 
@@ -18,7 +17,7 @@ class ColumnComponent extends React.Component {
     this.returnActiveness=this.returnActiveness.bind(this);
   }
 
-  handleChange(answer,event){ // Update the Column's Completeness to Parent Component - Container Component
+  handleChange(answer,event){ // Update the Column's Completeness to Parent Component - Row Component By Lifting State Up
 
     let entry=event.target.value.toLowerCase()
 
@@ -28,26 +27,21 @@ class ColumnComponent extends React.Component {
         correct:true,
       })
 
-      this["ipRef" + this.state.refId].blur();
+      this["ipRef" + this.state.refId].blur(); // Remove Focus From Input
 
-      this.props.updateRowCompleteness(1);
-    }
+      this.props.updateRowCompleteness(1); 
+    } 
 
 
-  }
-
-  componentDidMount=()=>{
-    if(this.state.refId===0 && this.state.rowId===1) {
-      console.log("this.state.refId===0 && this.state.rowId===1")
-      this["ipRef" + this.state.refId].focus();
-    }
   }
 
 
   returnBackgroundColor=()=>{
+
     if(this.state.character===" " && this.state.correct===false) return "#ffb74d"
     if(this.state.correct===true) return "#4caf50";
     else return "#e1e1e1";
+
   }
 
   componentDidUpdate=(prevProps)=>{
@@ -60,8 +54,10 @@ class ColumnComponent extends React.Component {
   }
 
   returnActiveness=()=>{
-    if(this.state.correct===true)return 1; // If Already Filled, Set "Disabled" To True. Else, Leave Open.
+
+    if(this.state.correct===true) return 1; // When Filled, Set "Disabled" To True. Else, Leave Open.
     else return 0; 
+
   }
 
 

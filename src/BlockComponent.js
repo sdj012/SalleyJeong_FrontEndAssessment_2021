@@ -42,7 +42,9 @@ class BlockComponent extends React.Component {
 
   breakSentence=()=>{ // Convert State String to an Array of Words
 
-    // Split Sentence By Space
+    // Retrieve Words By Splitting Sentence By Space
+    // Add A Space To All Words Except The Last
+
     let arrayOfWords=[]
     arrayOfWords=this.state.sentence.split(" ");
 
@@ -53,7 +55,7 @@ class BlockComponent extends React.Component {
     arrayOfWords.forEach(value=>{
 
       if(arrayOfWords.indexOf(value)!==lastElement){
-        arrayWithSpacing.push(value+" ");
+        arrayWithSpacing.push(value + " ");
       } else arrayWithSpacing.push(value);
       
     })

@@ -44,7 +44,7 @@ class RowComponent extends React.Component {
 
     this.createArrayOfCharacters();    
 
-    this.state.characterArray.map((word,index)=>{
+    this.state.characterArray.map((character,index)=>{
       this["column"+index]=React.createRef()
     })
 
@@ -60,15 +60,15 @@ class RowComponent extends React.Component {
 
   }
 
-  updateRowCompleteness=(point)=>{ // Update the Row's "Completeness" to Parent Component - Container Component
+  updateRowCompleteness=(point)=>{ // Update the Row's "Completeness" to Parent Component - Block Component. rowGrade is Default To 1, As There Is No Previous Column To Call UpdateRowCompleteness
 
-    this.setState({
+    if(this.state.rowGrade < this.state.word.length){ // As Long As The Row is Incomplete, Pass Focus To Next Column 
+      this["column"+this.state.rowGrade]["ipRef"+this.state.rowGrade].focus() // Give Focus To Next Element Through Refs , Which Happens To Correspond With The Current [rowGrade] (Before Updating)
+    };
+
+    this.setState({ // Update rowGrade By Adding Point(1)
       rowGrade:this.state.rowGrade+point
     })
-
-    if(this.state.rowGrade < this.state.word.length){ 
-      this["column"+this.state.rowGrade]["ipRef"+this.state.rowGrade].focus() // Give Focus To Next Element Through Refs , Which Happens To Correspond With The Current rowGrade
-    };
 
     if(this.state.rowGrade===this.state.word.length){
 
