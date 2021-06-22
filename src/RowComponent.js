@@ -14,7 +14,7 @@ class RowComponent extends React.Component {
       rowCompleteness:false,
     }
     
-    this.column=React.createRef();
+    // this.column=React.createRef();
     this.createArrayOfCharacters=this.createArrayOfCharacters.bind(this);
     this.updateRowCompleteness=this.updateRowCompleteness.bind(this);  
 

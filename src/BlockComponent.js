@@ -39,7 +39,6 @@ class BlockComponent extends React.Component {
   }
 
 
-
   breakSentence=()=>{ // Convert Sentence String to An Array
 
     // Retrieve Words By Splitting Sentence By Space

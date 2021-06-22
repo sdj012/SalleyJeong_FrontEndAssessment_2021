@@ -87,7 +87,8 @@ class Scramble extends React.Component {
     let MinVal=0
     let MaxVal=characterArray.length 
 
-    // Generate An Array Of Randomnly Aligned Numbers 'randomnOrder[]'. Must Be: As Long As The Word & Composed Of Values Between 0 and A Non-Inclusive Max Value = Equal To The Length Of The Word
+    // Generate An Array Of Randomnly Aligned Numbers 'randomnOrder[]'
+    //  Must Be: As Long As The Word & Composed Of Values Between 0 and A Non-Inclusive Value Equal To The Length Of The Word
 
     do{
       randomnIndex=Math.floor(Math.random() * MaxVal) + MinVal
@@ -104,8 +105,8 @@ class Scramble extends React.Component {
       ))
     }
 
-    // If The Word Is The First Word Of Sentence, Line Will Add The First Letter Sliced Earlier. Variable lastLetter Will Be Empty.
-    // If The Word Is The Last Word Of Sentence, Line Will Add The Last Letter Sliced Earlier. Variable first Letter Will Be Empty.
+    // If The Word Is The First Word Of Sentence, Line Will Add The First Letter Sliced Earlier. Variable 'lastLetter' Will Be Empty.
+    // If The Word Is The Last Word Of Sentence, Line Will Add The Last Letter Sliced Earlier. Variable 'firstLetter' Will Be Empty.
     // If Neither The First Word Or Last Word, Both 'firstLetter' and 'lastLetter' Variables Are Empty.
     
     scrambledWord = firstLetter + scrambledWord + lastLetter 
@@ -125,7 +126,7 @@ class Scramble extends React.Component {
 
   }
 
-  componentDidMount=()=>{ // When Component Mounts, Start Creating the Scramble by Coverting the String to an Array
+  componentDidMount=()=>{ // When Component Mounts, Creatie The Scramble By Generating An Array
 
     this.breakSentence();
 
